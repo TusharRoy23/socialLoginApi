@@ -407,7 +407,8 @@ abstract class BaseFacebook
     $this->setAccessToken($this->getApplicationAccessToken());
     $user_access_token = $this->getUserAccessToken();
     if ($user_access_token) {
-      $this->setAccessToken($user_access_token);
+      //$this->setAccessToken($user_access_token);
+      $this->accessToken = $user_access_token;
     }
 
     return $this->accessToken;
@@ -785,7 +786,8 @@ abstract class BaseFacebook
     }
 
     $response_params = array();
-    parse_str($access_token_response, $response_params);
+    //parse_str($access_token_response, $response_params);
+    $response_params = json_decode($access_token_response, true );
     if (!isset($response_params['access_token'])) {
       return false;
     }
